@@ -1,0 +1,20 @@
+version: '3.9'
+
+services:
+  dev-db:
+    image: postgres:16.1-alpine3.19
+    restart: always
+    env_file:
+      - ./unit-testing/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./unit-testing/scripts:/docker-entrypoint-initdb.d
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+name: fastapi-development
